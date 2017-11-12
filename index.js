@@ -42,6 +42,8 @@ async function main () {
         // Grab the first (and only) element of this array.
         // Split on the `=` and set the responseId appropriately.
         console.log(response.headers['set-cookie'])
+		respoonseId = response.headers['set-cookie']
+		
       })
       .catch((err) => {
         console.error(err)
