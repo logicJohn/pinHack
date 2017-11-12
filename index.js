@@ -1,13 +1,25 @@
 const rp = require('request-promise')
 
+let responseId = 'SlVXMDJMNjA3NzMx'
+let sessionId = 'TUxGWVdMNjA3NzMx'
+
+// const cookies = {
+//   TESTID: 'set',
+//   SESSID: responseId,
+//   BIGipServerbanner_ssbprd_8888: '810940938.47138.0000',
+//   TESTID: 'set',
+//   SESSID: sessionId
+// }
+
 let options = {
-  'method': 'POST',
-  'uri': 'https://ssbprd-banner.ecu.edu/DAD_PROD/bwskfreg.P_CheckAltPin',
-  'form': {
+  resolveWithFullResponse: true,
+  method: 'POST',
+  uri: 'https://ssbprd-banner.ecu.edu/DAD_PROD/bwskfreg.P_CheckAltPin',
+  form: {
     // Like <input type="text" name="name">
-    'pin': '000000'
+    pin: '000000'
   },
-  'headers': {
+  headers: {
     'Host': 'ssbprd-banner.ecu.edu',
     'Connection': 'keep-alive',
     'Content-Length': '10',
@@ -21,13 +33,13 @@ let options = {
     'Referer': 'https://ssbprd-banner.ecu.edu/DAD_PROD/bwskfreg.P_AltPin',
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'en-US,en;q=0.9',
-    'Cookie': 'TESTID=set; SESSID=MDBINkg5NjA3NzMx; BIGipServerbanner_ssbprd_8888=810940938.47138.0000; TESTID=set; SESSID=REMwUFI4NjA3NzMx'
+    'Cookie': `TESTID=set; SESSID=${responseId}; BIGipServerbanner_ssbprd_8888=810940938.47138.0000; TESTID=set; SESSID=${sessionId}`
   }
 }
 
 rp(options)
-  .then((body) => {
-    console.log(body)
+  .then((response) => {
+    console.log(response)
   })
   .catch((err) => {
     console.error(err)
