@@ -42,7 +42,10 @@ async function main () {
         // Grab the first (and only) element of this array.
         // Split on the `=` and set the responseId appropriately.
         console.log(response.headers['set-cookie'])
-		respoonseId = response.headers['set-cookie']
+		responseId = response.headers['set-cookie']
+		console.log(options.pin)
+		options.pin = pin
+		console.log(options.pin)
 		
       })
       .catch((err) => {
