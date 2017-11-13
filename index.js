@@ -1,7 +1,7 @@
 const rp = require('request-promise')
 
-let responseId = 'NUNRSTZMNjA3NzMx'
-let sessionId = 'TUxGWVdMNjA3NzMx'
+let responseId = 'QlNSUzlTNjA3NzMx'
+let sessionId = 'NEYyR0I2NjA3NzMx'
 
 let options = {
   resolveWithFullResponse: true,
@@ -39,11 +39,17 @@ async function main () {
         // If it doesn't print the pin and exit the script.
         console.log(response.body)
 
+		if(!response.body.search('Alternate PIN ')){
+			console.log("you win \n\n\n\n\n")
+			console.log(pin)
+			
+		}
+			
         // Grab the first (and only) element of this array.
         // Split on the `=` and set the responseId appropriately.
         console.log(response.headers['set-cookie'])
 		responseId = response.headers['set-cookie']
-		console.log(options.pin)
+		
 		options.pin = pin
 		console.log(options.pin)
 		
