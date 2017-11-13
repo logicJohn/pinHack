@@ -39,7 +39,8 @@ async function main () {
         // If it doesn't print the pin and exit the script.
         console.log(response.body)
 
-		if( response.body.search('Alternate PIN Verification') == -1 ){
+		if ( response.body.search('Alternate PIN Verification') == -1 )
+		{
 			console.log("you win \n\n\n\n\n")
 			console.log(pin)
 			
@@ -49,9 +50,9 @@ async function main () {
         // Split on the `=` and set the responseId appropriately.
         console.log(response.headers['set-cookie'])
 		responseId = response.headers['set-cookie']
-		console.log(options.pin)
+		console.log(options.form.pin)
 		options.pin = pin
-		console.log(options.pin)
+		console.log(options.form.pin)
 		
       })
       .catch((err) => {
